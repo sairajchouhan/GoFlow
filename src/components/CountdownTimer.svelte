@@ -82,28 +82,3 @@
 	<button on:click={handleTimerToggle}>{timerOn ? 'End Session' : 'Start Session'}</button>
 </div>
 
-<style>
-	.container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		font-size: 2rem;
-		margin: 1rem 0;
-	}
-
-	button {
-		padding: 8px 16px;
-		border: none;
-		margin-top: 16px;
-		border-radius: 4px;
-		cursor: pointer;
-	}
-
-	h6 {
-		margin: 0;
-		padding: 0;
-		font-weight: 400;
-		margin-bottom: 1rem;
-	}
-</style>
