@@ -4,7 +4,7 @@ const breakTimerDefaultValues = {
 	work: {
 		minutes: 25,
 		seconds: 0,
-		key: 'main' as const
+		key: 'work' as const
 	},
 	break: {
 		minutes: 5,

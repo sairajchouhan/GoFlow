@@ -11,20 +11,31 @@
 		</a>
 	</div>
 	<div class="flex justify-center items-center min-h-[70vh]">
-		<CountdownTimer timer={$settings.timer.breakTimer} />
+		<CountdownTimer
+			timer={$settings.timer.breakTimer}
+			timelineCallbacks={[
+				{
+					time:
+						($settings.timer.breakTimer.work.minutes * 60 +
+							$settings.timer.breakTimer.work.seconds) /
+						2,
+					callback: () => {
+						const audio = new Audio('/halfway.mp3');
+						audio.play().then(() => {
+							audio.remove();
+						});
+					}
+				},
+				{
+					time: 60,
+					callback: () => {
+						const audio = new Audio('/last_one_minute.mp3');
+						audio.play().then(() => {
+							audio.remove();
+						});
+					}
+				}
+			]}
+		/>
 	</div>
 </section>
-
-<!-- <figure>
-	<figcaption>Listen to the T-Rex:</figcaption>
-	<audio controls src="/music.mp3">
-		<a href="/music.mp3"> Download audio </a>
-	</audio>
-</figure>
-
-<figure>
-	<figcaption>Listen to the T-Rex:</figcaption>
-	<audio controls src="/music.mp3">
-		<a href="/music.mp3"> Download audio </a>
-	</audio>
-</figure> -->

@@ -2,6 +2,7 @@
 	import { zerofy } from '../lib/utils';
 	import { settings } from '$lib/stores';
 	export let timer: typeof $settings.timer.breakTimer;
+	export let timelineCallbacks: Array<{ time: number; callback: () => void }>;
 
 	let timerOn = false;
 	let timeOver = false;
@@ -40,7 +41,7 @@
 
 	$: {
 		if (timeOver) {
-			currentTimer = currentTimer.key === 'main' ? timer.break : timer.work;
+			currentTimer = currentTimer.key === 'work' ? timer.break : timer.work;
 			minutes = currentTimer.minutes;
 			seconds = currentTimer.seconds;
 			timeOver = false;
@@ -48,11 +49,21 @@
 			handleTimerToggle();
 		}
 	}
+
+	$: {
+		timelineCallbacks.forEach((timeline) => {
+			if (currentTimer.key === 'work') {
+				if (minutes * 60 + seconds === timeline.time) {
+					timeline.callback();
+				}
+			}
+		});
+	}
 </script>
 
 <div class="flex flex-col justify-center items-center">
 	<h1 class="text-4xl text-slate-300 mb-8 ">
-		{currentTimer.key === 'main' ? 'Get your work done' : 'Take a break'}
+		{currentTimer.key === 'work' ? 'Get your work done' : 'Take a break'}
 	</h1>
 
 	<div class="text-9xl text-slate-300">
