@@ -1,12 +1,12 @@
 import { writable } from 'svelte/store';
 
-const sessionTimerDefaultValues = {
-	workTimer: {
+const breakTimerDefaultValues = {
+	work: {
 		minutes: 25,
 		seconds: 0,
 		key: 'main' as const
 	},
-	breakTimer: {
+	break: {
 		minutes: 5,
 		seconds: 0,
 		key: 'break' as const
@@ -14,10 +14,10 @@ const sessionTimerDefaultValues = {
 };
 
 const defaultSettings = {
-	timers: sessionTimerDefaultValues
+	timers: breakTimerDefaultValues
 };
 
-type SessionTimer = typeof sessionTimerDefaultValues;
+type SessionTimer = typeof breakTimerDefaultValues;
 type UpdateSessionTimerArg = {
 	[key in keyof SessionTimer]: {
 		minutes: number;
@@ -32,15 +32,15 @@ function createSettingsStore() {
 		update((settings) => {
 			const tempSettings = {
 				timers: {
-					workTimer: {
-						...settings.timers.workTimer,
-						seconds: timer.workTimer.seconds,
-						minutes: timer.workTimer.minutes
+					work: {
+						...settings.timers.work,
+						seconds: timer.work.seconds,
+						minutes: timer.work.minutes
 					},
-					breakTimer: {
-						...settings.timers.breakTimer,
-						seconds: timer.breakTimer.seconds,
-						minutes: timer.breakTimer.minutes
+					break: {
+						...settings.timers.break,
+						seconds: timer.break.seconds,
+						minutes: timer.break.minutes
 					}
 				}
 			};
