@@ -4,7 +4,7 @@
 
 	let timerOn = false;
 	let timeOver = false;
-	const timers = $settings.timers;
+	const timers = $settings.timer.breakTimer;
 
 	let currentTimer: typeof timers[keyof typeof timers] = timers.work;
 	let minutes = currentTimer.minutes;

@@ -13,46 +13,40 @@ const breakTimerDefaultValues = {
 	}
 };
 
-const defaultSettings = {
-	timers: breakTimerDefaultValues
+const simpleTimerDefaultValues = {
+	simple: {
+		minutes: 0,
+		seconds: 0,
+		key: 'simple' as const
+	}
 };
 
-type SessionTimer = typeof breakTimerDefaultValues;
-type UpdateSessionTimerArg = {
-	[key in keyof SessionTimer]: {
-		minutes: number;
-		seconds: number;
+type BreakTimer = typeof breakTimerDefaultValues;
+type SimpleTimer = typeof simpleTimerDefaultValues;
+
+type SettingsStore = {
+	timerType: 'breakTimer' | 'simpleTimer';
+	timer: {
+		breakTimer: BreakTimer;
+		simpleTimer: SimpleTimer;
 	};
+};
+
+const defaultSettings: SettingsStore = {
+	timerType: 'breakTimer',
+	timer: {
+		breakTimer: breakTimerDefaultValues,
+		simpleTimer: simpleTimerDefaultValues
+	}
 };
 
 function createSettingsStore() {
-	const { subscribe, update, set } = writable(defaultSettings);
-
-	const updateSessionTimer = (timer: UpdateSessionTimerArg) => {
-		update((settings) => {
-			const tempSettings = {
-				timers: {
-					work: {
-						...settings.timers.work,
-						seconds: timer.work.seconds,
-						minutes: timer.work.minutes
-					},
-					break: {
-						...settings.timers.break,
-						seconds: timer.break.seconds,
-						minutes: timer.break.minutes
-					}
-				}
-			};
-			localStorage.setItem('settings', JSON.stringify(tempSettings));
-			return tempSettings;
-		});
-	};
+	const { subscribe, update, set } = writable<SettingsStore>(defaultSettings);
 
 	return {
 		subscribe,
 		set,
-		updateSessionTimer
+		update
 	};
 }
 
