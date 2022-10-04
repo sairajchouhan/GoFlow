@@ -6,7 +6,7 @@
 	let timeOver = false;
 	const timers = $settings.timers;
 
-	let currentTimer: typeof timers[keyof typeof timers] = timers.mainTimer;
+	let currentTimer: typeof timers[keyof typeof timers] = timers.workTimer;
 	let minutes = currentTimer.minutes;
 	let seconds = currentTimer.seconds;
 
@@ -30,7 +30,7 @@
 		}
 		if (timerOn) {
 			clearInterval(argToClearInterval);
-			currentTimer = timers.mainTimer;
+			currentTimer = timers.workTimer;
 			minutes = currentTimer.minutes;
 			seconds = currentTimer.seconds;
 		}
@@ -40,7 +40,7 @@
 
 	$: {
 		if (timeOver) {
-			currentTimer = currentTimer.key === 'main' ? timers.breakTimer : timers.mainTimer;
+			currentTimer = currentTimer.key === 'main' ? timers.breakTimer : timers.workTimer;
 			minutes = currentTimer.minutes;
 			seconds = currentTimer.seconds;
 			timeOver = false;

@@ -1,12 +1,18 @@
 <script>
-	import SimpleTimer from '../components/SimpleTimer.svelte';
 	import CountdownTimer from '../components/CountdownTimer.svelte';
+	import SettingsIcon from '../components/icons/settings.icon.svelte';
 </script>
 
-<!-- <SimpleTimer /> -->
-<div class="flex justify-center items-center min-h-[70vh]">
-	<CountdownTimer />
-</div>
+<section>
+	<div class="flex justify-end">
+		<a href="/settings" class="text-slate-200 m-4">
+			<SettingsIcon />
+		</a>
+	</div>
+	<div class="flex justify-center items-center min-h-[70vh]">
+		<CountdownTimer />
+	</div>
+</section>
 
 <!-- <figure>
 	<figcaption>Listen to the T-Rex:</figcaption>
