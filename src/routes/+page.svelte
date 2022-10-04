@@ -3,8 +3,10 @@
 	import CountdownTimer from '../components/CountdownTimer.svelte';
 </script>
 
-<SimpleTimer />
-<CountdownTimer />
+<!-- <SimpleTimer /> -->
+<div class="flex justify-center items-center min-h-[70vh]">
+	<CountdownTimer />
+</div>
 
 <!-- <figure>
 	<figcaption>Listen to the T-Rex:</figcaption>
