@@ -1,30 +1,16 @@
 <script lang="ts">
 	import { zerofy } from '../lib/utils';
+	import { settings } from '$lib/stores';
+
 	let timerOn = false;
 	let timeOver = false;
-
-	const timers = {
-		mainTimer: {
-			minutes: 0,
-			seconds: 5,
-			name: 'Main Timer',
-			key: 'main' as const
-		},
-		breakTimer: {
-			minutes: 0,
-			seconds: 2,
-			name: 'Break Timer',
-			key: 'break' as const
-		}
-	};
+	const timers = $settings.timers;
 
 	let currentTimer: typeof timers[keyof typeof timers] = timers.mainTimer;
 	let minutes = currentTimer.minutes;
 	let seconds = currentTimer.seconds;
 
 	let argToClearInterval: NodeJS.Timer;
-	let sessionsCompleted = 0;
-
 	let handleTimerToggle = () => {
 		if (!timerOn) {
 			argToClearInterval = setInterval(() => {
@@ -54,9 +40,6 @@
 
 	$: {
 		if (timeOver) {
-			if (currentTimer.key === 'main') {
-				sessionsCompleted++;
-			}
 			currentTimer = currentTimer.key === 'main' ? timers.breakTimer : timers.mainTimer;
 			minutes = currentTimer.minutes;
 			seconds = currentTimer.seconds;
@@ -69,7 +52,7 @@
 
 <div class="flex flex-col justify-center items-center">
 	<h1 class="text-4xl text-slate-300 mb-8 ">
-		{currentTimer.name === 'Main Timer' ? 'Get your work done' : 'Take a break'}
+		{currentTimer.key === 'main' ? 'Get your work done' : 'Take a break'}
 	</h1>
 
 	<div class="text-9xl text-slate-300">
