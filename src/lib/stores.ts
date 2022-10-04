@@ -24,7 +24,7 @@ const simpleTimerDefaultValues = {
 type BreakTimer = typeof breakTimerDefaultValues;
 type SimpleTimer = typeof simpleTimerDefaultValues;
 
-type SettingsStore = {
+export type SettingsStore = {
 	timerType: 'breakTimer' | 'simpleTimer';
 	timer: {
 		breakTimer: BreakTimer;

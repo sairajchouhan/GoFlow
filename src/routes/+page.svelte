@@ -1,6 +1,9 @@
 <script>
 	import CountdownTimer from '../components/CountdownTimer.svelte';
 	import SettingsIcon from '../components/icons/settings.icon.svelte';
+	import { settings } from '$lib/stores';
+
+	const breakTimer = $settings.timer.breakTimer;
 </script>
 
 <section>
@@ -10,7 +13,7 @@
 		</a>
 	</div>
 	<div class="flex justify-center items-center min-h-[70vh]">
-		<CountdownTimer />
+		<CountdownTimer timer={breakTimer} />
 	</div>
 </section>
 

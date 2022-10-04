@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { zerofy } from '../lib/utils';
 	import { settings } from '$lib/stores';
+	export let timer: typeof $settings.timer.breakTimer;
 
 	let timerOn = false;
 	let timeOver = false;
-	const timers = $settings.timer.breakTimer;
 
-	let currentTimer: typeof timers[keyof typeof timers] = timers.work;
+	let currentTimer: typeof timer[keyof typeof timer] = timer.work;
 	let minutes = currentTimer.minutes;
 	let seconds = currentTimer.seconds;
 
@@ -30,7 +30,7 @@
 		}
 		if (timerOn) {
 			clearInterval(argToClearInterval);
-			currentTimer = timers.work;
+			currentTimer = timer.work;
 			minutes = currentTimer.minutes;
 			seconds = currentTimer.seconds;
 		}
@@ -40,7 +40,7 @@
 
 	$: {
 		if (timeOver) {
-			currentTimer = currentTimer.key === 'main' ? timers.break : timers.work;
+			currentTimer = currentTimer.key === 'main' ? timer.break : timer.work;
 			minutes = currentTimer.minutes;
 			seconds = currentTimer.seconds;
 			timeOver = false;
