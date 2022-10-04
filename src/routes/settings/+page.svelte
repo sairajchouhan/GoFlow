@@ -11,6 +11,11 @@
 		const formSettings = Object.fromEntries(formData.entries());
 		console.log(formSettings);
 
+		settings.updateBreakTimerSettings({
+			breakTime: +formSettings.breakTime.toString(),
+			workTime: +formSettings.workTime.toString()
+		});
+
 		// try {
 		// 	settings.updateSessionTimer({
 		// 		workTimer: {
@@ -61,7 +66,7 @@
 					>
 					<div class="mt-1">
 						<input
-							value={defualtValues.workTime}
+							value={$settings.timer.breakTimer.work.minutes}
 							type="number"
 							name="workTime"
 							id="workTime"
@@ -76,7 +81,7 @@
 					>
 					<div class="mt-1">
 						<input
-							value={defualtValues.breakTime}
+							value={$settings.timer.breakTimer.break.minutes}
 							type="number"
 							name="breakTime"
 							id="breakTime"

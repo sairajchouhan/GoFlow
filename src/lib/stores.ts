@@ -43,10 +43,28 @@ const defaultSettings: SettingsStore = {
 function createSettingsStore() {
 	const { subscribe, update, set } = writable<SettingsStore>(defaultSettings);
 
+	const updateBreakTimerSettings = ({
+		workTime,
+		breakTime
+	}: {
+		workTime: number;
+		breakTime: number;
+	}) => {
+		update((settings) => {
+			if (settings.timerType === 'breakTimer') {
+				settings.timer.breakTimer.work.minutes = workTime;
+				settings.timer.breakTimer.break.minutes = breakTime;
+			}
+			localStorage.setItem('settings', JSON.stringify(settings));
+			return settings;
+		});
+	};
+
 	return {
 		subscribe,
 		set,
-		update
+		update,
+		updateBreakTimerSettings
 	};
 }
 
