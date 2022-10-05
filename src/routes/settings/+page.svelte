@@ -15,21 +15,6 @@
 			breakTime: +formSettings.breakTime.toString(),
 			workTime: +formSettings.workTime.toString()
 		});
-
-		// try {
-		// 	settings.updateSessionTimer({
-		// 		workTimer: {
-		// 			minutes: +formSettings.workTime.toString(),
-		// 			seconds: 0
-		// 		},
-		// 		breakTimer: {
-		// 			minutes: +formSettings.breakTime.toString(),
-		// 			seconds: 0
-		// 		}
-		// 	});
-		// } catch (err) {
-		// 	console.error(err);
-		// }
 	}
 
 	const defualtValues = {
@@ -46,7 +31,7 @@
 	<div class="bg-white/10 backdrop-blur-[6px] p-6 rounded-sm">
 		<h3 class="text-4xl text-slate-200 mb-4">Settings</h3>
 		<form on:submit={(e) => handleSettingsFormSubmit(e)} class="space-y-4">
-			<div>
+			<!-- <div>
 				<label for="timeType" class="block text-sm font-medium text-slate-200">Select Timer</label>
 				<select
 					id="timerType"
@@ -57,7 +42,7 @@
 					<option value="breakTimer" selected>Break Timer</option>
 					<option value="simpleTimer">Simple Timer</option>
 				</select>
-			</div>
+			</div> -->
 
 			{#if selectedTimer === 'breakTimer'}
 				<div>
