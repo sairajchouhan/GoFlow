@@ -2,6 +2,13 @@
 	import CountdownTimer from '../components/CountdownTimer.svelte';
 	import SettingsIcon from '../components/icons/settings.icon.svelte';
 	import { settings } from '$lib/stores';
+
+	function playAudio(src: string) {
+		const audio = new Audio(src);
+		audio.play().then(() => {
+			audio.remove();
+		});
+	}
 </script>
 
 <section>
@@ -19,21 +26,11 @@
 						($settings.timer.breakTimer.work.minutes * 60 +
 							$settings.timer.breakTimer.work.seconds) /
 						2,
-					callback: () => {
-						const audio = new Audio('/halfway.mp3');
-						audio.play().then(() => {
-							audio.remove();
-						});
-					}
+					callback: () => playAudio('/halfway.mp3')
 				},
 				{
 					time: 60,
-					callback: () => {
-						const audio = new Audio('/last_one_minute.mp3');
-						audio.play().then(() => {
-							audio.remove();
-						});
-					}
+					callback: () => playAudio('/last_one_minute.mp3')
 				}
 			]}
 		/>
